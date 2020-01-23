@@ -9,9 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchPlaceComponent } from './search-place/search-place.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { CostumeListComponent } from './costume-list/costume-list.component';
-import { CostumeModelComponent } from './costume-list/costume-model/costume-model.component';
-import { CostumeComponent } from './costume-list/costume-item/costume.component';
+import { CostumeListComponent } from './costume-model-list/costume-list.component';
+import { CostumeModelComponent } from './costume-model-list/costume-model/costume-model.component';
 import { DatepickerRangeComponent } from './calendar/datepicker-range/datepicker-range';
 import { registerLocaleData } from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
@@ -27,8 +26,7 @@ registerLocaleData(localeUa);
     CalendarComponent,
     CostumeListComponent,
     CostumeModelComponent,
-    CostumeComponent,
-    DatepickerRangeComponent
+    DatepickerRangeComponent,
   ],
   imports: [
     BrowserModule,

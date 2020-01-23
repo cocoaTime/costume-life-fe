@@ -1,1 +1,32 @@
-<p>costume-list works!</p>
+<div class="list-group">
+  <a
+    href="#"
+    class="list-group-item list-group-item-action flex-column align-items-start"
+    style="min-width: 70rem;"
+    *ngFor="let costumeModel of costumeModels">
+    <span class="float-left">
+        <img
+          [src]="costumeModel.imgPath"
+          alt="{{ costumeModel.name }}"
+          class="img-responsive"
+          style="max-height: 150px;">
+      </span>
+    <div class="float-left ml-3">
+      <h5 class="text-left">{{ costumeModel.name }}</h5>
+      <hr style="width: 40rem;">
+      <div class="btn-toolbar" role="toolbar">
+        <div
+          class="btn-group btn-group-lg mr-2"
+          role="group"
+          *ngFor="let sizeGroup of costumeModel.sizeGroups">
+          <button
+            type="button"
+            [ngClass]="(costume.available==true) ? 'btn btn-success' : 'btn btn-danger'"
+            *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
+        </div>
+      </div>
+    </div>
+    <small class="float-right">Артикул: {{ costumeModel.vendorCode }}</small>
+
+  </a>
+</div>
