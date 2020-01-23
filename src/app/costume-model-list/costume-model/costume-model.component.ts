@@ -9,13 +9,15 @@ import {SizeGroupComponent} from '../size-group.component';
 export class CostumeModelComponent implements OnInit {
   id: number;
   name: string;
+  consistsOf: string;
   vendorCode: string;
   imgPath: string;
   sizeGroups: SizeGroupComponent[];
 
-  constructor(id: number, name: string, vendorCode: string, imgPath: string, sizeGroups: SizeGroupComponent[]) {
+  constructor(id: number, name: string, consistsOf: string, vendorCode: string, imgPath: string, sizeGroups: SizeGroupComponent[]) {
     this.id = id;
     this.name = name;
+    this.consistsOf = consistsOf;
     this.vendorCode = vendorCode;
     this.imgPath = imgPath;
     this.sizeGroups = sizeGroups;

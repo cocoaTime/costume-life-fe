@@ -13,7 +13,8 @@ export class CostumeListComponent implements OnInit {
     new CostumeModelComponent(
       1,
       'Костюм Ван Хельсинга',
-      '32454253',
+      'плащ, жилетка, шляпа',
+      '122008',
       'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset22/IVM_6948-396x600.JPG',
 
       [
@@ -32,11 +33,22 @@ export class CostumeListComponent implements OnInit {
     new CostumeModelComponent(
       2,
       'Костюм весёлой Минни Маус',
-      '9876768',
+      'платье, ушки',
+      '122007',
       'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset8/IMG_0496-396x600.jpg',
       [
         new SizeGroupComponent('XXL', [
           new CostumeComponent(9, false)])
+      ]),
+    new CostumeModelComponent(
+      3,
+      'Костюм Джона Сноу',
+      'сюртук, брюки, пояс, имитация сапог, плащ',
+      '122006',
+      'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset15/IVM_3003-396x600.JPG',
+      [
+        new SizeGroupComponent('M', [
+          new CostumeComponent(10, true)])
       ])
   ];
 
