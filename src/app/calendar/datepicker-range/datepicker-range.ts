@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {RangeComponent} from './range.component';
 
 @Component({
   selector: 'app-datepicker-range',
@@ -25,35 +26,73 @@ import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
   `]
 })
 export class DatepickerRangeComponent {
-  hoveredDate: NgbDate;
-  fromDate: NgbDate;
-  toDate: NgbDate;
+  ranges: RangeComponent[];
+  currentRange: RangeComponent;
 
   constructor(calendar: NgbCalendar) {
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.ranges = [new RangeComponent().initWithDates(
+                    new NgbDate(2020, 1, 1),
+                    new NgbDate(2020, 1, 3)),
+                   new RangeComponent().initWithDates(
+                    new NgbDate(2020, 1, 21),
+                    new NgbDate(2020, 1, 23)),
+                   new RangeComponent().initWithDates(
+                    new NgbDate(2020, 2, 17),
+                    new NgbDate(2020, 2, 19)),
+                   new RangeComponent().initWithDates(
+                    new NgbDate(2020, 2, 7),
+                    new NgbDate(2020, 2, 7)),
+                   new RangeComponent().initWithDates(
+                    new NgbDate(2019, 12, 17),
+                    new NgbDate(2019, 12, 19)),
+                   new RangeComponent().initWithDates(
+                    new NgbDate(2020, 4, 7),
+                    new NgbDate(2020, 4, 9))];
+    this.currentRange = new RangeComponent();
   }
 
   onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
+    if (!this.currentRange.fromDate && !this.currentRange.toDate) {
+      this.currentRange.fromDate = date;
+    } else if (this.currentRange.fromDate &&
+              !this.currentRange.toDate &&
+              (date.after(this.currentRange.fromDate) || date.equals(this.currentRange.fromDate))) {
+      this.currentRange.toDate = date;
     } else {
-      this.toDate = null;
-      this.fromDate = date;
+      this.currentRange.toDate = null;
+      this.currentRange.fromDate = date;
     }
   }
 
   isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+    return this.currentRange.fromDate &&
+           !this.currentRange.toDate &&
+           this.currentRange.hoveredDate &&
+           date.after(this.currentRange.fromDate) &&
+           date.before(this.currentRange.hoveredDate);
   }
 
   isInside(date: NgbDate) {
-    return date.after(this.fromDate) && date.before(this.toDate);
+    let inRanges;
+    for (const range of this.ranges) {
+      if (date.after(range.fromDate) && date.before(range.toDate)) {
+        inRanges = true;
+      }
+    }
+    return (date.after(this.currentRange.fromDate) && date.before(this.currentRange.toDate)) || inRanges;
   }
 
   isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+    let inRanges;
+    for (const range of this.ranges) {
+      if (date.equals(range.fromDate) || date.equals(range.toDate)) {
+        inRanges = true;
+      }
+    }
+    return date.equals(this.currentRange.fromDate) ||
+           date.equals(this.currentRange.toDate) ||
+           this.isInside(date) ||
+           this.isHovered(date) ||
+           inRanges;
   }
 }
