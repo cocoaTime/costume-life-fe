@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'costume-item-life-fe';
+  pageToLoad = 'main';
+
+  onNavigate(page: string) {
+    this.pageToLoad = page;
+  }
 }

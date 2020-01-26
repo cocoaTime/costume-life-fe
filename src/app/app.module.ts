@@ -15,6 +15,8 @@ import { DatepickerRangeComponent } from './calendar/datepicker-range/datepicker
 import { registerLocaleData } from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
 import { MakeOrderModalComponent } from './calendar/make-order-modal/modal-config.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { FindOrderComponent } from './order-list/find-order/find-order.component';
 
 registerLocaleData(localeUa);
 
@@ -28,7 +30,9 @@ registerLocaleData(localeUa);
     CostumeListComponent,
     CostumeModelComponent,
     DatepickerRangeComponent,
-    MakeOrderModalComponent
+    MakeOrderModalComponent,
+    OrderListComponent,
+    FindOrderComponent
   ],
   imports: [
     BrowserModule,

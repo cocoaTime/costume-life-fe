@@ -25,7 +25,8 @@
           *ngFor="let sizeGroup of costumeModel.sizeGroups">
           <button
             type="button"
-            [ngClass]="(costume.available==true) ? 'btn btn-success' : 'btn btn-danger'"
+            class="btn"
+            [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
             *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
         </div>
       </div>

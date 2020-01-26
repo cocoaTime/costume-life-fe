@@ -4,7 +4,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-make-order-modal',
   templateUrl: './make-order-modal.html',
-  providers: [NgbModalConfig, NgbModal]
+  providers: [ NgbModalConfig, NgbModal ]
 })
 export class MakeOrderModalComponent {
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
