@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CostumeModelComponent } from './costume-model/costume-model.component';
 import {SizeGroupComponent} from './size-group.component';
 import {CostumeComponent} from './costume.component';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-costume-list',
   templateUrl: './costume-list.component.html',
-  styleUrls: ['./costume-list.component.css']
+  styleUrls: ['./costume-list.component.css'],
+  providers: [ NgbModalConfig, NgbModal ]
 })
 export class CostumeListComponent implements OnInit {
   costumeModels: CostumeModelComponent[] = [
@@ -52,7 +54,14 @@ export class CostumeListComponent implements OnInit {
       ])
   ];
 
-  constructor() { }
+  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+
+  open(content) {
+    this.modalService.open(content, { size: 'lg' });
+  }
 
   ngOnInit() {
   }
