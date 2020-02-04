@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SizeGroupComponent} from '../size-group.component';
+import { SizeGroupComponent } from '../size-group.component';
 
 @Component({
   selector: 'app-costume-model',

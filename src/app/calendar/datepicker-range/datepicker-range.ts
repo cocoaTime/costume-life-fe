@@ -29,26 +29,14 @@ export class DatepickerRangeComponent {
   ranges: RangeComponent[];
   currentRange: RangeComponent;
 
-  constructor(calendar: NgbCalendar) {
-    this.ranges = [new RangeComponent().initWithDates(
-                    new NgbDate(2020, 1, 1),
-                    new NgbDate(2020, 1, 3)),
-                   new RangeComponent().initWithDates(
-                    new NgbDate(2020, 1, 21),
-                    new NgbDate(2020, 1, 23)),
-                   new RangeComponent().initWithDates(
-                    new NgbDate(2020, 2, 17),
-                    new NgbDate(2020, 2, 19)),
-                   new RangeComponent().initWithDates(
-                    new NgbDate(2020, 2, 7),
-                    new NgbDate(2020, 2, 7)),
-                   new RangeComponent().initWithDates(
-                    new NgbDate(2019, 12, 17),
-                    new NgbDate(2019, 12, 19)),
-                   new RangeComponent().initWithDates(
-                    new NgbDate(2020, 4, 7),
-                    new NgbDate(2020, 4, 9))];
-    this.currentRange = new RangeComponent();
+  constructor(private calendar: NgbCalendar) {
+    this.ranges = [new RangeComponent(new NgbDate(2020, 1, 1), new NgbDate(2020, 1, 3)),
+                   new RangeComponent(new NgbDate(2020, 1, 21), new NgbDate(2020, 1, 23)),
+                   new RangeComponent(new NgbDate(2020, 2, 17), new NgbDate(2020, 2, 19)),
+                   new RangeComponent(new NgbDate(2020, 2, 7), new NgbDate(2020, 2, 7)),
+                   new RangeComponent(new NgbDate(2019, 12, 17), new NgbDate(2019, 12, 19)),
+                   new RangeComponent(new NgbDate(2020, 4, 7), new NgbDate(2020, 4, 9))];
+    this.currentRange = new RangeComponent(null, null);
   }
 
   onDateSelection(date: NgbDate) {

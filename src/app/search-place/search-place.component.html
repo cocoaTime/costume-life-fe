@@ -1,55 +1,57 @@
-
-    <form class="mt-3">
-      <div class="form-row">
-        <div class="col">
-          <label for="vendorCode">Артикул</label>
-          <input id="vendorCode" type="text" class="form-control">
-        </div>
-        <div class="col">
-          <label for="date">Дата</label>
-          <div class="input-group" id="date">
-            <input class="form-control"
-                   placeholder="рррр-мм-дд"
-                   name="dp"
-                   [(ngModel)]="model"
-                   ngbDatepicker
-                   #d="ngbDatepicker">
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary calendar"
-                (click)="d.toggle()"
-                type="button"
-                style="
+<form class="mt-3" (submit)="onSubmit()">
+  <div class="form-row">
+    <div class="col">
+      <label for="vendorCode">Артикул</label>
+      <input id="vendorCode" name="vendorCode" type="text" class="form-control" [(ngModel)]="searchForm.vendorCode">
+    </div>
+    <div class="col">
+      <label for="date">Дата</label>
+      <div class="input-group" id="date">
+        <input class="form-control"
+               placeholder="рррр-мм-дд"
+               name="dp"
+               [(ngModel)]="searchForm.date"
+               ngbDatepicker
+               #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+            style="
                   width: 2.75rem;
                   background-repeat: no-repeat;
                   background-size: 23px;
                   background-position: center;
                   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=)!important"></button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <label for="size">Размер</label>
-          <select id="size" class="form-control">
-            <option>XS</option>
-            <option>S</option>
-            <option>M</option>
-            <option selected>L</option>
-            <option>XL</option>
-            <option>XXL</option>
-          </select>
-        </div>
-        <div class="col">
-          <label for="gender">Пол</label>
-          <select id="gender" class="form-control">
-            <option>Женский</option>
-            <option selected>Мужской</option>
-            <option>Дети</option>
-          </select>
-        </div>
-        <div class="col-auto" style="margin-top: 2rem!important">
-          <button type="submit" class="btn btn-primary my-2 my-sm-0">Поиск</button>
         </div>
       </div>
-    </form>
+    </div>
+    <div class="col">
+      <label for="size">Размер</label>
+      <select id="size" name="size" class="form-control" [(ngModel)]="searchForm.size">
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option selected>L</option>
+        <option>XL</option>
+        <option>XXL</option>
+      </select>
+    </div>
+    <div class="col">
+      <label for="gender">Пол</label>
+      <select id="gender" name="gender" class="form-control" [(ngModel)]="searchForm.gender">
+        <option>Женский</option>
+        <option selected>Мужской</option>
+        <option>Дети</option>
+      </select>
+    </div>
+    <div class="col-auto" style="margin-top: 2rem!important">
+      <button
+        type="submit"
+        class="btn btn-primary my-2 my-sm-0">Поиск</button>
+    </div>
+  </div>
+</form>
+<hr>
 

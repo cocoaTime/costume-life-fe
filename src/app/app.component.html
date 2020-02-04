@@ -3,15 +3,13 @@
   <div class="row" *ngIf="pageToLoad === 'main'">
     <div class="col-md-12">
       <app-search-place></app-search-place>
-      <hr>
+      <app-calendar></app-calendar>
       <app-costume-list></app-costume-list>
-      <hr>
     </div>
   </div>
   <div class="row" *ngIf="pageToLoad === 'orders'">
     <div class="col-md-12">
       <app-order-list></app-order-list>
-      <hr>
     </div>
   </div>
 </div>

@@ -3,56 +3,39 @@
     class="list-group-item flex-column align-items-start"
     style="min-width: 65rem;"
     *ngFor="let costumeModel of costumeModels">
-    <span class="float-left">
+
+      <span class="float-left">
         <img
           [src]="costumeModel.imgPath"
           alt="{{ costumeModel.name }}"
           class="img-responsive"
           style="max-height: 170px;">
       </span>
-    <div class="float-left ml-3">
-      <h5 class="text-left">{{ costumeModel.name }}</h5>
-      <hr style="width: 50rem;">
-      <div class="row ml-0 mb-0" style="height: 1.5rem;">
-        <p style="font-weight: bold;">В костюм входит: </p>
-        <p class="ml-2">{{ costumeModel.consistsOf }}.</p>
-      </div>
-      <hr style="width: 50rem;">
 
-      <div class="btn-toolbar" role="toolbar">
-        <div
-          class="btn-group btn-group-lg mr-2"
-          role="group"
-          *ngFor="let sizeGroup of costumeModel.sizeGroups">
-            <button
-              type="button"
-              class="btn"
-              (click)="open(content)"
-              [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
-              *ngFor="let costume of sizeGroup.costumes">
-              <span>{{ sizeGroup.size }}</span>
+      <div class="float-left ml-3">
+        <h5 class="text-left">{{ costumeModel.name }}</h5>
+        <hr style="width: 50rem;">
+        <div class="row ml-0 mb-0" style="height: 1.5rem;">
+          <p style="font-weight: bold;">В костюм входит: </p>
+          <p class="ml-2">{{ costumeModel.consistsOf }}.</p>
+        </div>
+        <hr style="width: 50rem;">
 
-                <ng-template #content let-c="close" let-d="dismiss">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-basic-title">Бронирование</h5>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <app-calendar></app-calendar>
-                  </div>
-                  <div ngbAutofocus class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Оформить бронирование</button>
-                    <button type="button" class="btn btn-success" (click)="c('Save click')">Продолжить</button>
-                  </div>
-                </ng-template>
-
-            </button>
+        <div class="btn-toolbar" role="toolbar">
+          <div
+            class="btn-group btn-group-lg mr-2"
+            role="group"
+            *ngFor="let sizeGroup of costumeModel.sizeGroups">
+              <button
+                type="button"
+                class="btn"
+                [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
+                *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
+          </div>
         </div>
       </div>
 
-    </div>
-    <small class="float-right"><b>Артикул: </b>{{ costumeModel.vendorCode }}</small>
+      <small class="float-right"><b>Артикул: </b>{{ costumeModel.vendorCode }}</small>
   </div>
 </div>
+<hr [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">
