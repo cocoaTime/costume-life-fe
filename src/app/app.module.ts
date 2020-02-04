@@ -17,6 +17,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { FindOrderComponent } from './order-list/find-order/find-order.component';
 import { SearchPlaceService } from './search-place/search-place.service';
 import {CostumeModelComponent} from './costume-list/costume-model/costume-model.component';
+import { CurrentOrderComponent } from './current-order/current-order.component';
 
 registerLocaleData(localeUa);
 
@@ -31,7 +32,8 @@ registerLocaleData(localeUa);
     CostumeModelComponent,
     DatepickerRangeComponent,
     OrderListComponent,
-    FindOrderComponent
+    FindOrderComponent,
+    CurrentOrderComponent
   ],
   imports: [
     BrowserModule,
