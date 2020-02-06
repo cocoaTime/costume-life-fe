@@ -1,15 +1,11 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import {DateRangeComponent} from './date-range.component';
 
 export class RangeComponent {
-  public fromDate: NgbDate;
-  public toDate: NgbDate;
   public hoveredDate: NgbDate;
 
-  constructor() {}
+  constructor(public beforeOrderRange: DateRangeComponent,
+              public orderRange: DateRangeComponent,
+              public afterOrderRange: DateRangeComponent) {}
 
-  initWithDates(fromDate: NgbDate, toDate: NgbDate) {
-    this.fromDate = fromDate;
-    this.toDate = toDate;
-    return this;
-  }
 }

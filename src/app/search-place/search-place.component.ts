@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {SearchFormComponent} from './search-form.component';
+import {SearchPlaceService} from './search-place.service';
 
 @Component({
   selector: 'app-search-place',
   templateUrl: './search-place.component.html',
   styleUrls: ['./search-place.component.css']
 })
-export class SearchPlaceComponent implements OnInit {
-  model;
+export class SearchPlaceComponent {
+  searchForm: SearchFormComponent = new SearchFormComponent(null, null, 'L', 'Мужской');
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private searchFormService: SearchPlaceService) {
   }
 
+  onSubmit() {
+    this.searchFormService.setSearchForm(this.searchForm);
+  }
 }

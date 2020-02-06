@@ -1,0 +1,42 @@
+<div class="list-group">
+  <div
+    class="list-group-item flex-column align-items-start"
+    style="min-width: 65rem;"
+    *ngFor="let costumeModel of costumeModels">
+
+      <span class="float-left">
+        <img
+          [src]="costumeModel.imgPath"
+          alt="{{ costumeModel.name }}"
+          class="img-responsive"
+          style="max-height: 170px;">
+      </span>
+
+      <div class="float-left ml-3">
+        <h5 class="text-left">{{ costumeModel.name }}</h5>
+        <hr style="width: 50rem;">
+        <div class="row ml-0 mb-0" style="height: 1.5rem;">
+          <p style="font-weight: bold;">В костюм входит: </p>
+          <p class="ml-2">{{ costumeModel.consistsOf }}.</p>
+        </div>
+        <hr style="width: 50rem;">
+
+        <div class="btn-toolbar" role="toolbar">
+          <div
+            class="btn-group btn-group-lg mr-2"
+            role="group"
+            *ngFor="let sizeGroup of costumeModel.sizeGroups">
+              <button
+                type="button"
+                class="btn"
+                (click)="onClick(costume.id)"
+                [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
+                *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
+          </div>
+        </div>
+      </div>
+
+      <small class="float-right"><b>Артикул: </b>{{ costumeModel.vendorCode }}</small>
+  </div>
+</div>
+<hr [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">
