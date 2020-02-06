@@ -1,10 +1,8 @@
-import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CostumeModelComponent } from './costume-model/costume-model.component';
-import {SizeGroupComponent} from './size-group.component';
-import {CostumeComponent} from './costume.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {SearchPlaceService} from '../search-place/search-place.service';
-import {SearchFormComponent} from '../search-place/search-form.component';
+import {CostumeListService} from './costume-list.service';
 
 @Component({
   selector: 'app-costume-list',
@@ -15,7 +13,7 @@ import {SearchFormComponent} from '../search-place/search-form.component';
 export class CostumeListComponent implements OnInit {
   costumeModels: CostumeModelComponent[] = [];
 
-  constructor(private searchFormService: SearchPlaceService) {
+  constructor(private searchFormService: SearchPlaceService, private costumeListService: CostumeListService) {
   }
 
   ngOnInit() {
@@ -24,6 +22,10 @@ export class CostumeListComponent implements OnInit {
       (costumeModels: CostumeModelComponent[]) => {
         this.costumeModels = costumeModels;
       });
+  }
+
+  onClick(costumeId: string) {
+    this.costumeListService.setCostumeId(costumeId);
   }
 
 }

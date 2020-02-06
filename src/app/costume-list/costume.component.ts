@@ -1,3 +1,3 @@
 export class CostumeComponent {
-  constructor(public id: number, public available: boolean) {}
+  constructor(public id: string, public available: boolean) {}
 }

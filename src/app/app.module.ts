@@ -10,7 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchPlaceComponent } from './search-place/search-place.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CostumeListComponent } from './costume-list/costume-list.component';
-import { DatepickerRangeComponent } from './calendar/datepicker-range/datepicker-range';
+import { DatepickerRangeComponent } from './calendar/datepicker-range/datepicker-range.component';
 import { registerLocaleData } from '@angular/common';
 import localeUa from '@angular/common/locales/ru-UA';
 import { OrderListComponent } from './order-list/order-list.component';
@@ -18,6 +18,7 @@ import { FindOrderComponent } from './order-list/find-order/find-order.component
 import { SearchPlaceService } from './search-place/search-place.service';
 import {CostumeModelComponent} from './costume-list/costume-model/costume-model.component';
 import { CurrentOrderComponent } from './current-order/current-order.component';
+import {CostumeListService} from './costume-list/costume-list.service';
 
 registerLocaleData(localeUa);
 
@@ -44,8 +45,9 @@ registerLocaleData(localeUa);
   ],
   providers: [
     SearchPlaceService,
+    CostumeListService,
     {provide: LOCALE_ID, useValue: 'ru-UA'}
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

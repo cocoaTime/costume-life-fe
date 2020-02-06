@@ -29,6 +29,7 @@
               <button
                 type="button"
                 class="btn"
+                (click)="onClick(costume.id)"
                 [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
                 *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
           </div>
