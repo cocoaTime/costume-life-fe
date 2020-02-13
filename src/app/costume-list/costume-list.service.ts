@@ -24,46 +24,37 @@ export class CostumeListService {
   private getCostumeIdRanges(costumeId: string): RangeComponent[] {
     return [
       new RangeComponent(
-        new DateRangeComponent(null, null),
         new DateRangeComponent(
-          new NgbDate(2020, 1, 1), new NgbDate(2020, 1, 3)
+          new NgbDate(2020, 2, 3), new NgbDate(2020, 2, 3)
         ),
-        new DateRangeComponent(null, null)
+        new DateRangeComponent(
+          new NgbDate(2020, 2, 4), new NgbDate(2020, 2, 4)
+        ),
+        new DateRangeComponent(
+          new NgbDate(2020, 2, 5), new NgbDate(2020, 2, 5)
+        )
       ),
       new RangeComponent(
-        new DateRangeComponent(null, null),
         new DateRangeComponent(
-          new NgbDate(2020, 1, 21), new NgbDate(2020, 1, 23)
+          new NgbDate(2020, 3, 19), new NgbDate(2020, 3, 19)
         ),
-        new DateRangeComponent(null, null)
+        new DateRangeComponent(
+          new NgbDate(2020, 3, 20), new NgbDate(2020, 3, 20)
+        ),
+        new DateRangeComponent(
+          new NgbDate(2020, 3, 21), new NgbDate(2020, 3, 23)
+        )
       ),
       new RangeComponent(
-        new DateRangeComponent(null, null),
         new DateRangeComponent(
-          new NgbDate(2020, 2, Number(costumeId) + 7), new NgbDate(2020, 2, Number(costumeId) + 9)
+          null, null
         ),
-        new DateRangeComponent(null, null)
-      ),
-      new RangeComponent(
-        new DateRangeComponent(null, null),
         new DateRangeComponent(
-          new NgbDate(2020, 2, Number(costumeId)), new NgbDate(2020, 2, Number(costumeId) + 3)
+          new NgbDate(2020, 4, 13), new NgbDate(2020, 4, 13)
         ),
-        new DateRangeComponent(null, null)
-      ),
-      new RangeComponent(
-        new DateRangeComponent(null, null),
         new DateRangeComponent(
-          new NgbDate(2020, 3, Number(costumeId) + 4), new NgbDate(2020, 3, Number(costumeId) + 8)
-        ),
-        new DateRangeComponent(null, null)
-      ),
-      new RangeComponent(
-        new DateRangeComponent(null, null),
-        new DateRangeComponent(
-          new NgbDate(2020, 4, 16), new NgbDate(2020, 4, 19)
-        ),
-        new DateRangeComponent(null, null)
+          new NgbDate(2020, 4, 14), new NgbDate(2020, 4, 14)
+        )
       )
     ];
   }

@@ -18,7 +18,6 @@ export class CalendarComponent implements OnInit {
       (costumeId: string) => {
         this.costumeId = costumeId;
       });
-    console.log(this.costumeId);
   }
 
 }

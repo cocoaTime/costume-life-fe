@@ -19,6 +19,7 @@ import { SearchPlaceService } from './search-place/search-place.service';
 import {CostumeModelComponent} from './costume-list/costume-model/costume-model.component';
 import { CurrentOrderComponent } from './current-order/current-order.component';
 import {CostumeListService} from './costume-list/costume-list.service';
+import {FocusRemoverDirective} from './directives/button-focus-remover';
 
 registerLocaleData(localeUa);
 
@@ -34,7 +35,8 @@ registerLocaleData(localeUa);
     DatepickerRangeComponent,
     OrderListComponent,
     FindOrderComponent,
-    CurrentOrderComponent
+    CurrentOrderComponent,
+    FocusRemoverDirective
   ],
   imports: [
     BrowserModule,

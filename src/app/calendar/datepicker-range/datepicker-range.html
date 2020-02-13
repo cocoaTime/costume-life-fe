@@ -1,13 +1,24 @@
 <div class="text-center my-4">
-  <ngb-datepicker (select)="onDateSelection($event)" [displayMonths]="3" [dayTemplate]="t" outsideDays="hidden">
+  <ngb-datepicker (dateSelect)="onDateSelection($event)" [displayMonths]="3" [dayTemplate]="t" outsideDays="hidden">
   </ngb-datepicker>
   <ng-template #t let-date>
     <span class="custom-day"
-          [class.range]="isRange(date)"
-          [class.service-day]="isServiceDay(date)"
-          [class.faded]="isHovered(date) || isInside(date)"
-          (mouseenter)="currentRange.hoveredDate = date"
-          (mouseleave)="currentRange.hoveredDate = null">
+          [class.range]="isRange(date)
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.service-day]="(isServiceDay(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            || isServiceDay(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)
+            || isServiceDayForSavedRanges(date))
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.faded]="(isHovered(date)
+            || isInside(date))
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.dangerous]="isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            || isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          (mouseenter)="currentRange.setHoveredDate(date)"
+          (mouseleave)="currentRange.deleteHoveredDate()">
       {{ date.day }}
     </span>
   </ng-template>
