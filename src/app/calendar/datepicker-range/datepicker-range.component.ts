@@ -153,6 +153,7 @@ export class DatepickerRangeComponent implements OnInit {
     if (firstDate === null) {
       firstDate = this.currentRange.hoveredDate;
     }
+
     const secondDate = afterOrderRange.toDate;
     const insideRange = (date.after(firstDate)
       && date.before(secondDate));
