@@ -1,42 +1,76 @@
 <div class="list-group">
   <div
-    class="list-group-item flex-column align-items-start"
+    class="list-group-item flex-column align-items-start container"
     style="min-width: 65rem;"
     *ngFor="let costumeModel of costumeModels">
 
-      <span class="float-left">
+    <div class="row">
+      <span class="col">
         <img
           [src]="costumeModel.imgPath"
           alt="{{ costumeModel.name }}"
           class="img-responsive"
-          style="max-height: 170px;">
+          style="max-height: 180px; min-height: 180px;">
       </span>
 
-      <div class="float-left ml-3">
+      <div class="col">
         <h5 class="text-left">{{ costumeModel.name }}</h5>
-        <hr style="width: 50rem;">
+        <hr style="width: 47rem; margin-bottom: 10px; margin-top: 10px;">
         <div class="row ml-0 mb-0" style="height: 1.5rem;">
           <p style="font-weight: bold;">В костюм входит: </p>
           <p class="ml-2">{{ costumeModel.consistsOf }}.</p>
         </div>
-        <hr style="width: 50rem;">
+        <div class="row ml-0 mb-0 mt-1" style="height: 1.5rem;">
+          <p style="font-weight: bold;">Цена: </p>
+          <p class="ml-2">{{ costumeModel.price }} грн.</p>
+        </div>
+        <hr style="width: 47rem;">
 
         <div class="btn-toolbar" role="toolbar">
           <div
             class="btn-group btn-group-lg mr-2"
             role="group"
             *ngFor="let sizeGroup of costumeModel.sizeGroups">
-              <button
-                type="button"
-                class="btn"
-                (click)="onClick(costume.id)"
-                [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
-                *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
+            <button
+              type="button"
+              class="btn"
+              (click)="onClick(costume.id, costumeModel.vendorCode, sizeGroup.size)"
+              [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
+              *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
           </div>
         </div>
       </div>
 
-      <small class="float-right"><b>Артикул: </b>{{ costumeModel.vendorCode }}</small>
+      <div class="col" style="text-align: center;">
+        <ngb-rating [rate]=costumeModel.rate focusRemove>
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+        <small><b>Артикул: </b>{{ costumeModel.vendorCode }}</small>
+      </div>
+
+    </div>
   </div>
+
+  <div class="container" [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">
+    <div class="row">
+      <div class="col">
+        <ngb-pagination
+          class="d-flex justify-content-center"
+          style="margin-bottom: -1rem; margin-top: 1rem;"
+          (pageChange)="onPageChange($event)"
+          [collectionSize]="costumeModels.length"
+          [(page)]="page"
+          [maxSize]="3"
+          [pageSize]="5"
+          [rotate]="true"
+          [ellipses]="false"
+          [boundaryLinks]="true">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+
 </div>
 <hr [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">

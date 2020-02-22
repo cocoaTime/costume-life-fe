@@ -12,12 +12,16 @@
       <li class="nav-item" [ngClass]="(currentPage === 'orders') ? 'active' : ''">
         <a class="nav-link" href="#" (click)="onSelect('orders')">Бронирования</a>
       </li>
-      <li class="nav-item" [ngClass]="(currentPage === 'currentOrder') ? 'active' : ''">
-        <a class="nav-link" href="#" (click)="onSelect('currentOrder')">Текущий заказ</a>
-      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Номер бронирования" style="width: 15rem;">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item" [ngClass]="(currentPage === 'currentOrder') ? 'active' : ''">
+          <button type="button" class="btn btn-success" (click)="onSelect('currentOrder')">
+            Текущий заказ <span class="badge badge-light">0</span>
+          </button>
+        </li>
+      </ul>
+      <input class="form-control mr-sm-2 ml-2" type="search" placeholder="Номер бронирования" style="width: 15rem;">
       <button class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
     </form>
   </div>

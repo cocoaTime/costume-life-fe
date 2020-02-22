@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDate, NgbCalendar, NgbPopover, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {RangeComponent} from './range.component';
 import {DateRangeComponent} from './date-range.component';
-import {CostumeListService} from '../../costume-list/costume-list.service';
+import {CostumeModelService} from '../../costume-list/costume-model.service';
 
 @Component({
   selector: 'app-datepicker-range',
@@ -43,22 +43,27 @@ import {CostumeListService} from '../../costume-list/costume-list.service';
 export class DatepickerRangeComponent implements OnInit {
   ranges: RangeComponent[] = [];
   costumeId: string;
+  costumeVendorCode: string;
+  costumeSize: string;
   currentRange: RangeComponent = new RangeComponent(
     new DateRangeComponent(),
     new DateRangeComponent(),
     new DateRangeComponent()
   );
 
-  constructor(private calendar: NgbCalendar, private costumeListService: CostumeListService) {
+  constructor(private calendar: NgbCalendar,
+              private costumeModelService: CostumeModelService,
+              private ngbDateParserFormatter: NgbDateParserFormatter) {
     this.currentRange.setCalendar(this.calendar);
   }
 
-  onDateSelection(date: NgbDate) {
+  onDateSelection(date: NgbDate, popOver: NgbPopover) {
     if (!this.currentRange.orderRange.fromDate && !this.currentRange.orderRange.toDate) {
       this.currentRange.animatedBeforeOrderRange.chosen = true;
       this.currentRange.animatedAfterOrderRange.chosen = false;
 
       this.currentRange.orderRange.fromDate = date;
+      popOver.close();
 
       if (this.calendar.getWeekday(date) !== 1) {
         const prevDay = this.calendar.getPrev(date, 'd', 1);
@@ -82,6 +87,7 @@ export class DatepickerRangeComponent implements OnInit {
         endServiceDate = this.calendar.getNext(endServiceDate, 'd', 1);
       }
       this.currentRange.animatedAfterOrderRange.toDate = endServiceDate;
+      popOver.open();
 
       this.currentRange.beforeOrderRange = {...this.currentRange.animatedBeforeOrderRange};
       this.currentRange.afterOrderRange = {...this.currentRange.animatedAfterOrderRange};
@@ -94,6 +100,7 @@ export class DatepickerRangeComponent implements OnInit {
 
       this.currentRange.orderRange.fromDate = date;
       this.currentRange.orderRange.toDate = null;
+      popOver.close();
 
       this.currentRange.animatedBeforeOrderRange.fromDate = this.calendar.getPrev(date, 'd', 1);
       this.currentRange.animatedBeforeOrderRange.toDate = this.calendar.getPrev(date, 'd', 1);
@@ -178,14 +185,39 @@ export class DatepickerRangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ranges = this.costumeListService.ranges;
-    this.costumeListService.rangesChanged.subscribe(
+    this.ranges = this.costumeModelService.ranges;
+    this.costumeModelService.rangesChanged.subscribe(
       (ranges: RangeComponent[]) => {
         this.ranges = ranges;
       });
-    this.costumeListService.costumeIdChanged.subscribe(
+
+    this.costumeId = this.costumeModelService.costumeId;
+    this.costumeModelService.costumeIdChanged.subscribe(
       (costumeId: string) => {
         this.costumeId = costumeId;
       });
+
+    this.costumeVendorCode = this.costumeModelService.costumeVendorCode;
+    this.costumeModelService.costumeVendorCodeChanged.subscribe(
+      (costumeVendorCode: string) => {
+        this.costumeVendorCode = costumeVendorCode;
+      });
+
+    this.costumeSize = this.costumeModelService.costumeSize;
+    this.costumeModelService.costumeSizeChanged.subscribe(
+      (costumeSize: string) => {
+        this.costumeSize = costumeSize;
+      });
+  }
+
+  clearSelectedRange() {
+    this.currentRange.animatedBeforeOrderRange.chosen = false;
+    this.currentRange.animatedAfterOrderRange.chosen = false;
+
+    this.currentRange.orderRange.fromDate = null;
+    this.currentRange.orderRange.toDate = null;
+
+    this.currentRange.beforeOrderRange = new DateRangeComponent(null, null);
+    this.currentRange.afterOrderRange = new DateRangeComponent(null, null);
   }
 }

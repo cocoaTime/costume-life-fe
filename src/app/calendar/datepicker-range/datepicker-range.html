@@ -1,5 +1,55 @@
 <div class="text-center my-4">
-  <ngb-datepicker (dateSelect)="onDateSelection($event)" [displayMonths]="3" [dayTemplate]="t" outsideDays="hidden">
+  <ng-template #popContent>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Артикул:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ costumeVendorCode }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Размер:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ costumeSize }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Начало:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ ngbDateParserFormatter.format(currentRange.orderRange.fromDate) }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Окончание:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ ngbDateParserFormatter.format(currentRange.orderRange.toDate) }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pl-0 pr-0">
+          <button type="button" class="btn btn-primary">Добавить в заказ</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ngb-datepicker placement="right"
+                  [ngbPopover]="popContent"
+                  popoverTitle="Информация"
+                  #p="ngbPopover"
+                  (dateSelect)="onDateSelection($event, p)"
+                  triggers="manual"
+                  [displayMonths]="3"
+                  [dayTemplate]="t"
+                  (clickOutside)="clearSelectedRange()"
+                  outsideDays="hidden">
   </ngb-datepicker>
   <ng-template #t let-date>
     <span class="custom-day"
