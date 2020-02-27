@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="currentUser">
   <a class="navbar-brand">Mi-parti</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,16 +7,22 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item" [ngClass]="(currentPage === 'main') ? 'active' : ''">
-        <a class="nav-link" href="#" (click)="onSelect('main')">Главная<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/main" (click)="onSelect('main')">Главная<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" [ngClass]="(currentPage === 'orders') ? 'active' : ''">
-        <a class="nav-link" href="#" (click)="onSelect('orders')">Бронирования</a>
+        <a class="nav-link" routerLink="/orders" (click)="onSelect('orders')">Бронирования</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin" [ngClass]="(currentPage === 'statistics') ? 'active' : ''">
+        <a class="nav-link" routerLink="/statistics" (click)="onSelect('statistics')">Cтатистика</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" (click)="logout()">Выйти</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item" [ngClass]="(currentPage === 'currentOrder') ? 'active' : ''">
-          <button type="button" class="btn btn-success" (click)="onSelect('currentOrder')">
+        <li class="nav-item">
+          <button type="button" class="btn btn-success" routerLink="/current-order">
             Текущий заказ <span class="badge badge-light">0</span>
           </button>
         </li>

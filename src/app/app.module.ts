@@ -27,6 +27,8 @@ import {HomeComponent} from './authorization/home';
 import {LoginComponent} from './authorization/login';
 import {ErrorInterceptor, fakeBackendProvider, JwtInterceptor} from './authorization/helpers';
 import {routing} from './app.routing';
+import { MainComponent } from './main/main.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 registerLocaleData(localeUa);
 
@@ -47,7 +49,9 @@ registerLocaleData(localeUa);
     ClickOutsideDirective,
     HomeComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    MainComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

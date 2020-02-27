@@ -1,4 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../authorization/services';
+import {Role, User} from '../authorization/models';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +10,28 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   currentPage: string;
+  currentUser: User;
   @Output() pageSelected = new EventEmitter<string>();
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) {
+    this.currentPage = 'main';
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
 
   onSelect(page: string) {
     this.currentPage = page;
     this.pageSelected.emit(this.currentPage);
-  }
-
-  constructor() {
-    this.currentPage = 'main';
   }
 
   ngOnInit() {
