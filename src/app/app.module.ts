@@ -18,8 +18,17 @@ import { FindOrderComponent } from './order-list/find-order/find-order.component
 import { SearchPlaceService } from './search-place/search-place.service';
 import {CostumeModelComponent} from './costume-list/costume-model/costume-model.component';
 import { CurrentOrderComponent } from './current-order/current-order.component';
-import {CostumeListService} from './costume-list/costume-list.service';
+import {CostumeModelService} from './costume-list/costume-model.service';
 import {FocusRemoverDirective} from './directives/button-focus-remover';
+import {ClickOutsideDirective} from './directives/click-outside.directive';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AdminComponent} from './authorization/admin';
+import {HomeComponent} from './authorization/home';
+import {LoginComponent} from './authorization/login';
+import {ErrorInterceptor, fakeBackendProvider, JwtInterceptor} from './authorization/helpers';
+import {routing} from './app.routing';
+import { MainComponent } from './main/main.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 registerLocaleData(localeUa);
 
@@ -36,19 +45,32 @@ registerLocaleData(localeUa);
     OrderListComponent,
     FindOrderComponent,
     CurrentOrderComponent,
-    FocusRemoverDirective
+    FocusRemoverDirective,
+    ClickOutsideDirective,
+    HomeComponent,
+    AdminComponent,
+    LoginComponent,
+    MainComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    routing
   ],
   providers: [
     SearchPlaceService,
-    CostumeListService,
-    {provide: LOCALE_ID, useValue: 'ru-UA'}
+    CostumeModelService,
+    {provide: LOCALE_ID, useValue: 'ru-UA'},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

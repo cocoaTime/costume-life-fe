@@ -6,19 +6,29 @@ import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
-export class CostumeListService {
+export class CostumeModelService {
   rangesChanged = new EventEmitter<RangeComponent[]>();
   costumeIdChanged = new EventEmitter<string>();
+  costumeVendorCodeChanged = new EventEmitter<string>();
+  costumeSizeChanged = new EventEmitter<string>();
+
   ranges: RangeComponent[] = [];
   costumeId: string;
+  costumeVendorCode: string;
+  costumeSize: string;
 
   constructor() { }
 
-  setCostumeId(costumeId: string) {
+  setCostumeId(costumeId: string, costumeVendorCode: string, costumeSize: string) {
     this.costumeId = costumeId;
     this.ranges = this.getCostumeIdRanges(costumeId);
+    this.costumeVendorCode = costumeVendorCode;
+    this.costumeSize = costumeSize;
+
     this.rangesChanged.emit(this.ranges);
     this.costumeIdChanged.emit(this.costumeId);
+    this.costumeVendorCodeChanged.emit(this.costumeVendorCode);
+    this.costumeSizeChanged.emit(this.costumeSize);
   }
 
   private getCostumeIdRanges(costumeId: string): RangeComponent[] {

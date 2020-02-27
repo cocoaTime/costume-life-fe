@@ -2,10 +2,6 @@ import {NgbCalendar, NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {DateRangeComponent} from './date-range.component';
 
 export class RangeComponent {
-
-  constructor(public beforeOrderRange: DateRangeComponent,
-              public orderRange: DateRangeComponent,
-              public afterOrderRange: DateRangeComponent) {}
   public hoveredDate: NgbDate;
   public animatedBeforeOrderRange: DateRangeComponent = new DateRangeComponent();
   public animatedAfterOrderRange: DateRangeComponent = new DateRangeComponent();
@@ -13,6 +9,10 @@ export class RangeComponent {
   private calendar: NgbCalendar;
   private animatedBeforeOrderRangeState: DateRangeComponent = new DateRangeComponent();
   private animatedAfterOrderRangeState: DateRangeComponent = new DateRangeComponent();
+
+  constructor(public beforeOrderRange: DateRangeComponent,
+              public orderRange: DateRangeComponent,
+              public afterOrderRange: DateRangeComponent) {}
 
   static saveState(range: DateRangeComponent) {
     return new DateRangeComponent(range.fromDate, range.toDate, range.chosen);

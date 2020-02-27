@@ -1,21 +1,12 @@
-<app-header (pageSelected)="onNavigate($event)"></app-header>
-<div class="container">
-  <div class="row" *ngIf="pageToLoad === 'main'">
-    <div class="col-md-12">
-      <app-search-place></app-search-place>
-      <app-calendar></app-calendar>
-      <app-costume-list></app-costume-list>
-    </div>
-  </div>
-  <div class="row" *ngIf="pageToLoad === 'orders'">
-    <div class="col-md-12">
-      <app-order-list></app-order-list>
-    </div>
-  </div>
-  <div class="row" *ngIf="pageToLoad === 'currentOrder'">
-    <div class="col-md-12">
-      <app-current-order></app-current-order>
-    </div>
-  </div>
-</div>
+<!-- nav -->
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">-->
+<!--  <div class="navbar-nav">-->
+<!--    <a class="nav-item nav-link" routerLink="/">Home</a>-->
+<!--    <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>-->
+<!--    <a class="nav-item nav-link" (click)="logout()">Logout</a>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<app-header></app-header>
+<router-outlet></router-outlet>
 <app-footer></app-footer>
