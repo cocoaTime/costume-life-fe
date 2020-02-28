@@ -14,7 +14,7 @@ export class CostumeListComponent implements OnInit {
   costumeModels: CostumeModelComponent[] = [];
   page = 1;
 
-  constructor(private searchFormService: SearchPlaceService,
+  constructor(private searchPlaceService: SearchPlaceService,
               private costumeListService: CostumeModelService,
               private ratingConfig: NgbRatingConfig) {
     ratingConfig.max = 5;
@@ -22,15 +22,15 @@ export class CostumeListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.costumeModels = this.searchFormService.costumeModels;
-    this.searchFormService.costumeModelsChanged.subscribe(
+    this.costumeModels = this.searchPlaceService.costumeModels;
+    this.searchPlaceService.costumeModelsChanged.subscribe(
       (costumeModels: CostumeModelComponent[]) => {
         this.costumeModels = costumeModels;
       });
   }
 
   onPageChange(pageNumber: number) {
-    this.searchFormService.setCurrentPage(pageNumber);
+    this.searchPlaceService.setCurrentPage(pageNumber);
   }
 
   onClick(costumeId: string, costumeVendorCode: string, costumeSize: string) {

@@ -214,6 +214,10 @@ export class DatepickerRangeComponent implements OnInit {
     this.currentRange.animatedBeforeOrderRange.chosen = false;
     this.currentRange.animatedAfterOrderRange.chosen = false;
 
+    this.currentRange.animatedBeforeOrderRange = new DateRangeComponent(null, null);
+    this.currentRange.animatedAfterOrderRange = new DateRangeComponent(null, null);
+    this.currentRange.clearStates();
+
     this.currentRange.orderRange.fromDate = null;
     this.currentRange.orderRange.toDate = null;
 
