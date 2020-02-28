@@ -23,6 +23,11 @@ export class SearchPlaceService  {
     this.costumeModelsChanged.emit(this.costumeModels);
   }
 
+  setCostumeModels(costumeModels: CostumeModelComponent[]) {
+    this.costumeModels = costumeModels;
+    this.costumeModelsChanged.emit(this.costumeModels);
+  }
+
   setCurrentPage(page: number) {
     this.page = page;
     this.costumeModels = this.getCostumeModelsBySearchCriteria(this.page, this.searchForm);

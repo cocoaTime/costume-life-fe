@@ -1,4 +1,4 @@
-<hr [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">
+<hr *ngIf="costumeModels.length !== 0">
 
 <div class="list-group">
   <div
@@ -55,7 +55,7 @@
     </div>
   </div>
 
-  <div class="container" [ngStyle]="{'display': costumeModels.length === 0 ? 'none' : null}">
+  <div class="container" *ngIf="costumeModels.length !== 0">
     <div class="row">
       <div class="col">
         <ngb-pagination

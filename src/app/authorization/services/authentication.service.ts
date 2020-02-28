@@ -3,13 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from '../models';
+import {SearchPlaceService} from '../../search-place/search-place.service';
+import {CostumeModelService} from '../../costume-list/costume-model.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private searchPlaceService: SearchPlaceService,
+                private costumeModelService: CostumeModelService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -36,5 +42,8 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+
+        this.searchPlaceService.setCostumeModels([]);
+        this.costumeModelService.setCostumeId(null, null, null);
     }
 }

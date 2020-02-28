@@ -56,4 +56,9 @@ export class RangeComponent {
   setCalendar(calendar: NgbCalendar) {
     this.calendar = calendar;
   }
+
+  clearStates() {
+    this.animatedBeforeOrderRangeState = new DateRangeComponent(null, null);
+    this.animatedAfterOrderRangeState = new DateRangeComponent(null, null);
+  }
 }

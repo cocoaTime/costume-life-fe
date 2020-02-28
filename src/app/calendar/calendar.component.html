@@ -1,4 +1,4 @@
-<div [ngStyle]="{'display': costumeId === undefined ? 'none' : null}">
+<div *ngIf="costumeId !== undefined && costumeId !== null">
   <hr>
   <app-datepicker-range></app-datepicker-range>
 </div>
