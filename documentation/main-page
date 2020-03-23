@@ -1,23 +1,4 @@
-1. 
-Description: Authorization
-Type: POST
-URL: /users/authenticate
-Body:
-      {
-         "username",
-         “password"
-      }
-Response:
-      {
-         "id",
-         "username",
-         "firstName",
-         "lastName",
-         "role",
-         "token"
-      }
-
-2.
+1.
 Description: Get list of costumes by filter
 Type: POST
 URL: ?
@@ -54,7 +35,7 @@ Response:
          }
       ]
       
-3.
+2.
 Description: Get costume date ranges
 Type: GET
 URL: /date-ranges/{costumeId}
