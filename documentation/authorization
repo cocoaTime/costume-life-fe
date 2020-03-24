@@ -1,0 +1,18 @@
+1.
+Description: Authorization
+Type: POST
+URL: /users/authenticate
+Body:
+      {
+         "username",
+         “password"
+      }
+Response:
+      {
+         "id",
+         "username",
+         "firstName",
+         "lastName",
+         "role",
+         "token"
+      }

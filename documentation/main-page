@@ -1,0 +1,58 @@
+1.
+Description: Get list of costumes by filter
+Type: POST
+URL: ?
+Headers: Authorization
+Body:
+      {
+         "pageNumber",
+         "searchForm":{
+            "vendorCode",
+            "date",
+            "size",
+            "gender"
+         }
+      }
+Response: 
+      [
+         {
+            "id",
+            "name",
+            "consistsOf",
+            "price",
+            "vendorCode",
+            "imgPath",
+            "rate",
+            "sizeGroups":[
+               {
+                  "size",
+                  "costumes":[
+                     "id",
+                     "available"
+                  ]
+               }
+            ]
+         }
+      ]
+      
+2.
+Description: Get costume date ranges
+Type: GET
+URL: /date-ranges/{costumeId}
+Headers: Authorization
+Body: ?
+Response:
+      {
+         "beforeOrderRange":{
+            "fromDate",
+            "toDate"
+         },
+         "orderRange":{
+            "fromDate",
+            "toDate"
+         },
+         "afterOrderRange":{
+            "fromDate",
+            "toDate"
+         }
+      }
