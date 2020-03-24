@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../authorization/services';
 import {Role, User} from '../authorization/models';
+import {CurrentOrderService} from '../current-order/current-order.service';
+import {ConfiguredCostumeComponent} from '../current-order/configured-costume.component';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +11,14 @@ import {Role, User} from '../authorization/models';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  currentPage: string;
+  currentPage = 'main';
   currentUser: User;
+  currentOrderItemsCount: number;
   @Output() pageSelected = new EventEmitter<string>();
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService) {
-    this.currentPage = 'main';
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService,
+              private currentOrderService: CurrentOrderService) {
   }
 
   get isAdmin() {
@@ -35,6 +36,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
 
+    this.currentOrderItemsCount = this.currentOrderService.items.length;
+    this.currentOrderService.itemsChanged.subscribe(
+      (items: ConfiguredCostumeComponent[]) => {
+        this.currentOrderItemsCount = items.length;
+      });
+  }
 }

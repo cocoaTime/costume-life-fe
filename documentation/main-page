@@ -16,19 +16,20 @@ Body:
 Response: 
       [
          {
-            "id",
+            "vendorCode",
             "name",
             "consistsOf",
             "price",
-            "vendorCode",
             "imgPath",
             "rate",
             "sizeGroups":[
                {
                   "size",
                   "costumes":[
-                     "id",
-                     "available"
+                     {
+                        "id",
+                        "available"
+                     }
                   ]
                }
             ]
