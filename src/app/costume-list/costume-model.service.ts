@@ -1,11 +1,8 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter} from '@angular/core';
 import {RangeComponent} from '../calendar/datepicker-range/range.component';
 import {DateRangeComponent} from '../calendar/datepicker-range/date-range.component';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class CostumeModelService {
   rangesChanged = new EventEmitter<RangeComponent[]>();
   costumeIdChanged = new EventEmitter<string>();

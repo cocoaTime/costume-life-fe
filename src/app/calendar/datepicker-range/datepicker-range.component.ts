@@ -3,6 +3,8 @@ import {NgbDate, NgbCalendar, NgbPopover, NgbDateParserFormatter} from '@ng-boot
 import {RangeComponent} from './range.component';
 import {DateRangeComponent} from './date-range.component';
 import {CostumeModelService} from '../../costume-list/costume-model.service';
+import {CurrentOrderService} from '../../current-order/current-order.service';
+import {ConfiguredCostumeComponent} from '../../current-order/configured-costume.component';
 
 @Component({
   selector: 'app-datepicker-range',
@@ -42,6 +44,7 @@ import {CostumeModelService} from '../../costume-list/costume-model.service';
 })
 export class DatepickerRangeComponent implements OnInit {
   ranges: RangeComponent[] = [];
+  currentOrderItems: ConfiguredCostumeComponent[] = [];
   costumeId: string;
   costumeVendorCode: string;
   costumeSize: string;
@@ -53,7 +56,8 @@ export class DatepickerRangeComponent implements OnInit {
 
   constructor(private calendar: NgbCalendar,
               private costumeModelService: CostumeModelService,
-              private ngbDateParserFormatter: NgbDateParserFormatter) {
+              private ngbDateParserFormatter: NgbDateParserFormatter,
+              private currentOrderService: CurrentOrderService) {
     this.currentRange.setCalendar(this.calendar);
   }
 
@@ -108,6 +112,16 @@ export class DatepickerRangeComponent implements OnInit {
       this.currentRange.beforeOrderRange = new DateRangeComponent(null, null);
       this.currentRange.afterOrderRange = new DateRangeComponent(null, null);
     }
+  }
+
+  addItemToCurrentOrder() {
+    const configuredCostume = new ConfiguredCostumeComponent(
+      this.costumeId,
+      this.costumeSize,
+      this.currentRange.beforeOrderRange,
+      this.currentRange.orderRange,
+      this.currentRange.afterOrderRange);
+    this.currentOrderService.addItem(configuredCostume);
   }
 
   isHovered(date: NgbDate) {
@@ -207,6 +221,12 @@ export class DatepickerRangeComponent implements OnInit {
     this.costumeModelService.costumeSizeChanged.subscribe(
       (costumeSize: string) => {
         this.costumeSize = costumeSize;
+      });
+
+    this.currentOrderItems = this.currentOrderService.items;
+    this.currentOrderService.itemsChanged.subscribe(
+      (items: ConfiguredCostumeComponent[]) => {
+        this.currentOrderItems = items;
       });
   }
 

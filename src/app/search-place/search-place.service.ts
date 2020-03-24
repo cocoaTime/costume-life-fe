@@ -37,7 +37,6 @@ export class SearchPlaceService  {
   private getCostumeModelsBySearchCriteria(pageNumber: number, searchForm: SearchFormComponent): CostumeModelComponent[] {
     const costumes: CostumeModelComponent[] = [
       new CostumeModelComponent(
-        1,
         'Костюм Ван Хельсинга',
         'плащ, жилетка, шляпа',
         '500',
@@ -59,7 +58,6 @@ export class SearchPlaceService  {
         ],
         5),
       new CostumeModelComponent(
-        2,
         'Костюм весёлой Минни Маус',
         'платье, ушки',
         '550',
@@ -71,7 +69,6 @@ export class SearchPlaceService  {
         ],
         4),
       new CostumeModelComponent(
-        3,
         'Костюм Джона Сноу',
         'сюртук, брюки, пояс, имитация сапог, плащ',
         '600',

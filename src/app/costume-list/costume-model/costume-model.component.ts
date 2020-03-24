@@ -7,7 +7,6 @@ import { SizeGroupComponent } from '../size-group.component';
   styleUrls: ['./costume-model.component.css']
 })
 export class CostumeModelComponent implements OnInit {
-  id: number;
   name: string;
   consistsOf: string;
   price: string;
@@ -16,9 +15,8 @@ export class CostumeModelComponent implements OnInit {
   rate: number;
   sizeGroups: SizeGroupComponent[];
 
-  constructor(id: number, name: string, consistsOf: string, price: string,
+  constructor(name: string, consistsOf: string, price: string,
               vendorCode: string, imgPath: string, sizeGroups: SizeGroupComponent[], rate: number) {
-    this.id = id;
     this.name = name;
     this.consistsOf = consistsOf;
     this.price = price;

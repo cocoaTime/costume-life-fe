@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item" [ngClass]="(currentPage === 'main') ? 'active' : ''">
-        <a class="nav-link" routerLink="/main" (click)="onSelect('main')">Главная<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/main" (click)="onSelect('main')">Главная</a>
       </li>
       <li class="nav-item" [ngClass]="(currentPage === 'orders') ? 'active' : ''">
         <a class="nav-link" routerLink="/orders" (click)="onSelect('orders')">Бронирования</a>
@@ -23,7 +23,7 @@
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <button type="button" class="btn btn-success" routerLink="/current-order">
-            Текущий заказ <span class="badge badge-light">0</span>
+            Текущий заказ <span class="badge badge-light">{{ currentOrderItemsCount }}</span>
           </button>
         </li>
       </ul>
