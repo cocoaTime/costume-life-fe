@@ -5,6 +5,7 @@ import {DateRangeComponent} from './date-range.component';
 import {CostumeModelService} from '../../costume-list/costume-model.service';
 import {CurrentOrderService} from '../../current-order/current-order.service';
 import {ConfiguredCostumeComponent} from '../../current-order/configured-costume.component';
+import {CostumeModelComponent} from '../../costume-list/costume-model/costume-model.component';
 
 @Component({
   selector: 'app-datepicker-range',
@@ -45,9 +46,7 @@ import {ConfiguredCostumeComponent} from '../../current-order/configured-costume
 export class DatepickerRangeComponent implements OnInit {
   ranges: RangeComponent[] = [];
   currentOrderItems: ConfiguredCostumeComponent[] = [];
-  costumeId: string;
-  costumeVendorCode: string;
-  costumeSize: string;
+  costumeModel: CostumeModelComponent;
   currentRange: RangeComponent = new RangeComponent(
     new DateRangeComponent(),
     new DateRangeComponent(),
@@ -116,8 +115,7 @@ export class DatepickerRangeComponent implements OnInit {
 
   addItemToCurrentOrder() {
     const configuredCostume = new ConfiguredCostumeComponent(
-      this.costumeId,
-      this.costumeSize,
+      this.costumeModel,
       this.currentRange.beforeOrderRange,
       this.currentRange.orderRange,
       this.currentRange.afterOrderRange);
@@ -205,22 +203,10 @@ export class DatepickerRangeComponent implements OnInit {
         this.ranges = ranges;
       });
 
-    this.costumeId = this.costumeModelService.costumeId;
-    this.costumeModelService.costumeIdChanged.subscribe(
-      (costumeId: string) => {
-        this.costumeId = costumeId;
-      });
-
-    this.costumeVendorCode = this.costumeModelService.costumeVendorCode;
-    this.costumeModelService.costumeVendorCodeChanged.subscribe(
-      (costumeVendorCode: string) => {
-        this.costumeVendorCode = costumeVendorCode;
-      });
-
-    this.costumeSize = this.costumeModelService.costumeSize;
-    this.costumeModelService.costumeSizeChanged.subscribe(
-      (costumeSize: string) => {
-        this.costumeSize = costumeSize;
+    this.costumeModel = this.costumeModelService.costumeModel;
+    this.costumeModelService.costumeModelChanged.subscribe(
+      (costumeModel: CostumeModelComponent) => {
+        this.costumeModel = costumeModel;
       });
 
     this.currentOrderItems = this.currentOrderService.items;

@@ -33,8 +33,8 @@ export class CostumeListComponent implements OnInit {
     this.searchPlaceService.setCurrentPage(pageNumber);
   }
 
-  onClick(costumeId: string, costumeVendorCode: string, costumeSize: string) {
-    this.costumeListService.setCostumeId(costumeId, costumeVendorCode, costumeSize);
+  onClick(costumeModel: CostumeModelComponent) {
+    this.costumeListService.setCostumeModel(costumeModel);
   }
 
 }

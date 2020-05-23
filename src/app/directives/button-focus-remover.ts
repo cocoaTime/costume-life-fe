@@ -8,6 +8,5 @@ export class FocusRemoverDirective {
 
   @HostListener('click') onClick() {
     this.renderer.invokeElementMethod(this.elRef.nativeElement, 'blur', []);
-    console.log('hah');
   }
 }

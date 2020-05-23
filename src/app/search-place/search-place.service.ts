@@ -1,8 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {SearchFormComponent} from './search-form.component';
 import {CostumeModelComponent} from '../costume-list/costume-model/costume-model.component';
-import {SizeGroupComponent} from '../costume-list/size-group.component';
-import {CostumeComponent} from '../costume-list/costume.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,49 +33,35 @@ export class SearchPlaceService  {
   }
 
   private getCostumeModelsBySearchCriteria(pageNumber: number, searchForm: SearchFormComponent): CostumeModelComponent[] {
+    // TODO
     const costumes: CostumeModelComponent[] = [
       new CostumeModelComponent(
         'Костюм Ван Хельсинга',
         'плащ, жилетка, шляпа',
-        '500',
+        500,
         '122008',
         'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset22/IVM_6948-396x600.JPG',
 
-        [
-          new SizeGroupComponent('M', [
-            new CostumeComponent('1', false),
-            new CostumeComponent('2', true),
-            new CostumeComponent('3', true)]),
-          new SizeGroupComponent('XL', [
-            new CostumeComponent('4', false),
-            new CostumeComponent('5', false),
-            new CostumeComponent('6', true)]),
-          new SizeGroupComponent('XXL', [
-            new CostumeComponent('7', true),
-            new CostumeComponent('8', true)])
-        ],
+        'XL',
+        true,
         5),
       new CostumeModelComponent(
         'Костюм весёлой Минни Маус',
         'платье, ушки',
-        '550',
+        550,
         '122007',
         'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset8/IMG_0496-396x600.jpg',
-        [
-          new SizeGroupComponent('XXL', [
-            new CostumeComponent('9', false)])
-        ],
+        'XXL',
+        false,
         4),
       new CostumeModelComponent(
         'Костюм Джона Сноу',
         'сюртук, брюки, пояс, имитация сапог, плащ',
-        '600',
+        600,
         '122006',
         'https://mi-parti.com.ua/components/com_mijoshop/opencart/image/cache/data/Fotoset15/IVM_3003-396x600.JPG',
-        [
-          new SizeGroupComponent('M', [
-            new CostumeComponent('10', true)])
-        ],
+        'M',
+        true,
         3)
     ];
 

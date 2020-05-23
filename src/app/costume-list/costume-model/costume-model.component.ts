@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SizeGroupComponent } from '../size-group.component';
 
 @Component({
   selector: 'app-costume-model',
@@ -9,21 +8,23 @@ import { SizeGroupComponent } from '../size-group.component';
 export class CostumeModelComponent implements OnInit {
   name: string;
   consistsOf: string;
-  price: string;
+  price: number;
   vendorCode: string;
   imgPath: string;
   rate: number;
-  sizeGroups: SizeGroupComponent[];
+  size: string;
+  available: boolean;
 
-  constructor(name: string, consistsOf: string, price: string,
-              vendorCode: string, imgPath: string, sizeGroups: SizeGroupComponent[], rate: number) {
+  constructor(name: string, consistsOf: string, price: number,
+              vendorCode: string, imgPath: string, size: string, available: boolean, rate: number) {
     this.name = name;
     this.consistsOf = consistsOf;
     this.price = price;
     this.vendorCode = vendorCode;
     this.imgPath = imgPath;
-    this.sizeGroups = sizeGroups;
+    this.size = size;
     this.rate = rate;
+    this.available = available;
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CostumeModelService} from '../costume-list/costume-model.service';
+import {CostumeModelComponent} from '../costume-list/costume-model/costume-model.component';
 
 @Component({
   selector: 'app-calendar',
@@ -7,16 +8,16 @@ import {CostumeModelService} from '../costume-list/costume-model.service';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  costumeId: string;
+  costumeModel: CostumeModelComponent;
 
   constructor(private costumeModelService: CostumeModelService) {
   }
 
   ngOnInit() {
-    this.costumeId = this.costumeModelService.costumeId;
-    this.costumeModelService.costumeIdChanged.subscribe(
-      (costumeId: string) => {
-        this.costumeId = costumeId;
+    this.costumeModel = this.costumeModelService.costumeModel;
+    this.costumeModelService.costumeModelChanged.subscribe(
+      (costumeModel: CostumeModelComponent) => {
+        this.costumeModel = costumeModel;
       });
   }
 

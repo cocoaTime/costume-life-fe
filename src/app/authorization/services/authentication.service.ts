@@ -44,6 +44,6 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
 
         this.searchPlaceService.setCostumeModels([]);
-        this.costumeModelService.setCostumeId(null, null, null);
+        this.costumeModelService.setCostumeModel(null);
     }
 }
