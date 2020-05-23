@@ -1,10 +1,9 @@
 import {DateRangeComponent} from '../calendar/datepicker-range/date-range.component';
+import {CostumeModelComponent} from '../costume-list/costume-model/costume-model.component';
 
 export class ConfiguredCostumeComponent {
-  constructor(public costumeVendorCode: string,
-              public costumeSize: string,
+  constructor(public costumeModel: CostumeModelComponent,
               public beforeOrderRange: DateRangeComponent,
               public orderRange: DateRangeComponent,
-              public afterOrderRange: DateRangeComponent,
-              public id?: string) {}
+              public afterOrderRange: DateRangeComponent) {}
 }

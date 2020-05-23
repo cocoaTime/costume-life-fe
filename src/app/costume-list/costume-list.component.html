@@ -28,19 +28,11 @@
         </div>
         <hr style="width: 47rem;">
 
-        <div class="btn-toolbar" role="toolbar">
-          <div
-            class="btn-group btn-group-lg mr-2"
-            role="group"
-            *ngFor="let sizeGroup of costumeModel.sizeGroups">
-            <button
-              type="button"
-              class="btn"
-              (click)="onClick(costume.id, costumeModel.vendorCode, sizeGroup.size)"
-              [ngClass]="(costume.available==true) ? 'btn-success' : 'btn-danger'"
-              *ngFor="let costume of sizeGroup.costumes">{{ sizeGroup.size }}</button>
-          </div>
-        </div>
+        <button
+          type="button"
+          class="btn-lg mr-2"
+          (click)="onClick(costumeModel)"
+          [ngClass]="(costumeModel.available === true) ? 'btn-success' : 'btn-danger'">{{ costumeModel.size }}</button>
       </div>
 
       <div class="col" style="text-align: center;">

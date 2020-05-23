@@ -1,17 +1,142 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form class="mt-3">
+      <form class="mt-3" [formGroup]="currentOrderForm" (ngSubmit)="onSubmit(p)">
         <div class="form-row">
           <div class="col">
-            <label for="orderCode">Тест</label>
-            <input id="orderCode" type="search" class="form-control">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+            <div [ngStyle]="{'display': submitted && f.name.errors ? 'block' : 'none'}"
+                 class="invalid-feedback">
+              Введите имя
+            </div>
+          </div>
+          <div class="col">
+            <label for="lastName">Фамилия</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+            <div [ngStyle]="{'display': submitted && f.lastName.errors ? 'block' : 'none'}"
+                 class="invalid-feedback">
+              Введите фамилию
+            </div>
+          </div>
+          <div class="col">
+            <label for="phone">Телефон</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+            <div [ngStyle]="{'display': submitted && f.phone.errors ? 'block' : 'none'}"
+                 class="invalid-feedback">
+              Введите номер телефона
+            </div>
+          </div>
+          <div class="col">
+            <label for="money">Задаток</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="money" formControlName="money" [ngClass]="{ 'is-invalid': submitted && f.money.errors }">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">из {{ price }} грн.</span>
+              </div>
+            </div>
+            <div [ngStyle]="{'display': submitted && f.money.errors ? 'block' : 'none'}"
+                 class="invalid-feedback">
+              Введите сумму задатка
+            </div>
           </div>
           <div class="col-auto" style="margin-top: 2rem!important">
-            <button type="submit" class="btn btn-primary my-2 my-sm-0">Поиск</button>
+            <button focusRemove
+                    class="btn btn-primary"
+                    type="submit"
+                    [ngbPopover]="popContent"
+                    #p="ngbPopover"
+                    triggers="manual"
+                    placement="top">Подтвердить</button>
           </div>
         </div>
+        <div class="form-row mt-3">
+          <div class="col">
+            <input type="text" class="form-control" id="comment" placeholder="Комментарий" formControlName="comment">
+          </div>
+        </div>
+
+        <ng-template class="error" #popContent>
+          <div style="color: #dc3545;">{{error}}</div>
+        </ng-template>
       </form>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr *ngIf="currentOrderItems.length !== 0">
+
+      <div class="list-group">
+        <div
+          class="list-group-item flex-column align-items-start container"
+          style="min-width: 65rem;"
+          *ngFor="let costumeItem of currentOrderItems">
+
+          <div class="row">
+        <span class="col">
+          <img
+            [src]="costumeItem.costumeModel.imgPath"
+            alt="{{ costumeItem.costumeModel.name }}"
+            class="img-responsive"
+            style="max-height: 180px; min-height: 180px;">
+        </span>
+
+            <div class="col">
+              <h5 class="text-left">{{ costumeItem.costumeModel.name }}</h5>
+              <hr style="width: 47rem; margin-bottom: 10px; margin-top: 10px;">
+              <div class="row ml-0 mb-0" style="height: 1.5rem;">
+                <p style="font-weight: bold;">В костюм входит: </p>
+                <p class="ml-2">{{ costumeItem.costumeModel.consistsOf }}.</p>
+              </div>
+              <div class="row ml-0 mb-0 mt-1" style="height: 1.5rem;">
+                <p style="font-weight: bold;">Цена: </p>
+                <p class="ml-2">{{ costumeItem.costumeModel.price }} грн.</p>
+              </div>
+              <div class="row ml-0 mb-0 mt-1" style="height: 1.5rem;">
+                <p style="font-weight: bold;">Размер: </p>
+                <p class="ml-2">{{ costumeItem.costumeModel.size }}</p>
+              </div>
+              <hr style="width: 47rem;"style="margin-top: 5px; margin-bottom: 12px;">
+              <button focusRemove
+                      class="btn btn-outline-secondary"
+                      type="submit">
+                {{ ngbDateParserFormatter.format(costumeItem.orderRange.fromDate) + " - " + ngbDateParserFormatter.format(costumeItem.orderRange.toDate )}}</button>
+            </div>
+
+            <div class="col" style="text-align: center;">
+              <ngb-rating [rate]=costumeItem.costumeModel.rate focusRemove>
+                <ng-template let-fill="fill" let-index="index">
+                  <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                </ng-template>
+              </ngb-rating>
+              <small><b>Артикул: </b>{{ costumeItem.costumeModel.vendorCode }}</small>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container" *ngIf="currentOrderItems.length !== 0">
+          <div class="row">
+            <div class="col">
+              <ngb-pagination
+                class="d-flex justify-content-center"
+                style="margin-bottom: -1rem; margin-top: 1rem;"
+                (pageChange)="onPageChange($event)"
+                [collectionSize]="currentOrderItems.length"
+                [(page)]="page"
+                [maxSize]="3"
+                [pageSize]="5"
+                [rotate]="true"
+                [ellipses]="false"
+                [boundaryLinks]="true">
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,33 @@
+:host ::ng-deep .popover {
+  text-align: center;
+  border: 1px solid rgb(255, 0, 0);
+  font-size: 80%;
+  max-width: 22rem;
+  white-space: nowrap;
+}
+
+:host ::ng-deep .popover-body {
+  padding: .15rem .5rem;
+  color: #212529;
+}
+
+:host ::ng-deep .bs-popover-top>.arrow::before {
+  bottom: 0;
+  border-width: .5rem .5rem 0;
+  border-top-color: rgb(255, 0, 0);
+}
+
+.star {
+  font-size: 1.5rem;
+  color: rgba(255, 193, 7, 0.21);
+}
+.filled {
+  color: #ffc107;
+}
+.bad {
+  color: rgba(255, 193, 7, 0.21);
+}
+.filled.bad {
+  color: #ffc107;
+}
+
