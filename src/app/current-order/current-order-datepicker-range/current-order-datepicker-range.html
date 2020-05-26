@@ -1,0 +1,75 @@
+<div class="text-center my-4">
+  <ng-template #popContent>
+    <form class="container" (submit)="addItemToCurrentOrder()">
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Артикул:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ costumeModel.vendorCode }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Размер:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ costumeModel.size }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Начало:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ ngbDateParserFormatter.format(currentRange.orderRange.fromDate) }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p style="font-weight: bold;">Окончание:</p>
+        </div>
+        <div class="col" style="display: inline-block;">
+          <p>{{ ngbDateParserFormatter.format(currentRange.orderRange.toDate) }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col pl-0 pr-0">
+          <button type="submit" class="btn btn-primary">Добавить в заказ</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ngb-datepicker placement="right"
+                  [ngbPopover]="popContent"
+                  popoverTitle="Информация"
+                  #p="ngbPopover"
+                  (dateSelect)="onDateSelection($event, p)"
+                  triggers="manual"
+                  [displayMonths]="3"
+                  [dayTemplate]="t"
+                  (clickOutside)="clearSelectedRange()"
+                  outsideDays="hidden">
+  </ngb-datepicker>
+  <ng-template #t let-date>
+    <span class="custom-day"
+          [class.range]="isRange(date)
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.service-day]="(isServiceDay(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            || isServiceDay(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)
+            || isServiceDayForSavedRanges(date))
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.faded]="(isHovered(date)
+            || isInside(date))
+            && !isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            && !isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          [class.dangerous]="isDangerous(currentRange.animatedBeforeOrderRange, date, currentRange.animatedAfterOrderRange)
+            || isDangerous(currentRange.beforeOrderRange, date, currentRange.afterOrderRange)"
+          (mouseenter)="currentRange.setHoveredDate(date)"
+          (mouseleave)="currentRange.deleteHoveredDate()">
+      {{ date.day }}
+    </span>
+  </ng-template>
+</div>

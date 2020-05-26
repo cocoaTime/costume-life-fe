@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CurrentOrderService} from './current-order.service';
 import {ConfiguredCostumeComponent} from './configured-costume.component';
 import {NgbDateParserFormatter, NgbPopover, NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {CostumeModelComponent} from '../costume-list/costume-model/costume-model.component';
 
 @Component({
   selector: 'app-current-order',
@@ -14,6 +15,7 @@ export class CurrentOrderComponent implements OnInit {
   submitted = false;
   error = '';
   currentOrderItems: ConfiguredCostumeComponent[] = [];
+  costumeModel: CostumeModelComponent;
   page = 1;
   price = 0;
 
@@ -46,12 +48,17 @@ export class CurrentOrderComponent implements OnInit {
   }
 
   onPageChange(pageNumber: number) {
-    // TODO
+    this.currentOrderService.setCurrentPage(pageNumber);
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.currentOrderForm.controls;
+  }
+
+  onClick(costumeModel: CostumeModelComponent) {
+    this.currentOrderService.setCostumeModel(costumeModel);
+    this.costumeModel = costumeModel;
   }
 
   onSubmit(popOver: NgbPopover) {
