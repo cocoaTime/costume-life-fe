@@ -29,6 +29,7 @@ import {ErrorInterceptor, fakeBackendProvider, JwtInterceptor} from './authoriza
 import {routing} from './app.routing';
 import { MainComponent } from './main/main.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import {CurrentOrderDatepickerRangeComponent} from './current-order/current-order-datepicker-range/current-order-datepicker-range.component';
 
 registerLocaleData(localeUa);
 
@@ -42,6 +43,7 @@ registerLocaleData(localeUa);
     CostumeListComponent,
     CostumeModelComponent,
     DatepickerRangeComponent,
+    CurrentOrderDatepickerRangeComponent,
     OrderListComponent,
     FindOrderComponent,
     CurrentOrderComponent,

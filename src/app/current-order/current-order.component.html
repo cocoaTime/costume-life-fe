@@ -64,6 +64,11 @@
     </div>
   </div>
 
+  <div *ngIf="costumeModel !== undefined && costumeModel !== null">
+    <hr>
+    <app-co-datepicker-range></app-co-datepicker-range>
+  </div>
+
   <div class="row">
     <div class="col-md-12">
       <hr *ngIf="currentOrderItems.length !== 0">
@@ -101,6 +106,7 @@
               <hr style="width: 47rem;"style="margin-top: 5px; margin-bottom: 12px;">
               <button focusRemove
                       class="btn btn-outline-secondary"
+                      (click)="onClick(costumeItem.costumeModel)"
                       type="submit">
                 {{ ngbDateParserFormatter.format(costumeItem.orderRange.fromDate) + " - " + ngbDateParserFormatter.format(costumeItem.orderRange.toDate )}}</button>
             </div>

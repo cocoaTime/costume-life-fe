@@ -14,36 +14,40 @@ export class CostumeModelService {
   constructor() { }
 
   setCostumeModel(costumeModel: CostumeModelComponent) {
-    this.ranges = this.getCostumeRanges(costumeModel.vendorCode);
+    if (costumeModel !== null) {
+      this.refreshRanges(costumeModel.vendorCode);
+    } else {
+      this.ranges = [];
+    }
     this.costumeModel = costumeModel;
 
     this.rangesChanged.emit(this.ranges);
     this.costumeModelChanged.emit(this.costumeModel);
   }
 
-  private getCostumeRanges(costumeVendorCode: string): RangeComponent[] {
+  private refreshRanges(costumeVendorCode: string) {
     // TODO
-    return [
+    this.ranges = [
       new RangeComponent(
         new DateRangeComponent(
-          new NgbDate(2020, 2, 3), new NgbDate(2020, 2, 3)
+          new NgbDate(2020, 5, 11), new NgbDate(2020, 5, 11)
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 2, 4), new NgbDate(2020, 2, 4)
+          new NgbDate(2020, 5, 12), new NgbDate(2020, 5, 14)
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 2, 5), new NgbDate(2020, 2, 5)
+          new NgbDate(2020, 5, 15), new NgbDate(2020, 5, 15)
         )
       ),
       new RangeComponent(
         new DateRangeComponent(
-          new NgbDate(2020, 3, 19), new NgbDate(2020, 3, 19)
+          new NgbDate(2020, 7, 1), new NgbDate(2020, 7, 1)
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 3, 20), new NgbDate(2020, 3, 20)
+          new NgbDate(2020, 7, 2), new NgbDate(2020, 7, 3)
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 3, 21), new NgbDate(2020, 3, 23)
+          new NgbDate(2020, 7, 4), new NgbDate(2020, 7, 6)
         )
       ),
       new RangeComponent(
@@ -51,10 +55,10 @@ export class CostumeModelService {
           null, null
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 4, 13), new NgbDate(2020, 4, 13)
+          new NgbDate(2020, 6, 15), new NgbDate(2020, 6, 19)
         ),
         new DateRangeComponent(
-          new NgbDate(2020, 4, 14), new NgbDate(2020, 4, 14)
+          new NgbDate(2020, 6, 20), new NgbDate(2020, 6, 22)
         )
       )
     ];
